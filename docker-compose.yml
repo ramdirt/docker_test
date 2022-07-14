@@ -1,0 +1,20 @@
+version: "3"
+services:
+        mysql:
+                image: mysql
+                ports:
+                        - 3306:3306
+                environment:
+                        - MYSQL_ROOT_PASSWORD=test
+        nginx:
+                image: test/nginx
+                ports:
+                        - 80:80
+                links:
+                        - php
+                volumes:
+                        - /home/test/dockertest/www:/var/www
+        php:
+                image: macedigital/phpfpm
+                volumes:
+                        - /home/test/dockertest/www:/var/www
